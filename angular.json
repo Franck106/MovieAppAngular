@@ -5,7 +5,9 @@
   "projects": {
     "ProjectForTest": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "inlineTemplate": true
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
