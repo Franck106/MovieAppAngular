@@ -5,8 +5,10 @@
   "projects": {
     "ProjectForTest": {
       "projectType": "application",
-      "schematics": {
-        "inlineTemplate": true
+      "schematics": {"@schematics/angular:component": {
+        "inlineTemplate": true,
+        "skipTests": true
+      }
       },
       "root": "",
       "sourceRoot": "src",
