@@ -23,7 +23,8 @@
     ],
     "import-blacklist": [
       true,
-      "rxjs/Rx"
+      "rxjs/Rx",
+      ["src/", "projects/"]
     ],
     "interface-name": false,
     "max-classes-per-file": false,
@@ -83,7 +84,9 @@
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "no-any": true,
+    "typedef": [true, "call-signature"]
   },
   "rulesDirectory": [
     "codelyzer"

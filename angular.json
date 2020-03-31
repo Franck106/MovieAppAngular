@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "ProjectForTest": {
+      "i18n": {
+        "sourceLocale": "fr",
+        "locales": {
+          "en": "src/locale/messages.en.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,7 +67,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
             }
           }
         },
@@ -129,5 +137,8 @@
       }
     }
   },
-  "defaultProject": "ProjectForTest"
+  "defaultProject": "ProjectForTest",
+  "cli": {
+    "analytics": false
+  }
 }

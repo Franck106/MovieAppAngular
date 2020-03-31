@@ -3,6 +3,11 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -11,10 +16,40 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@core/auth": [
+        "src/app/core/auth"
+      ],
+      "@core/environment": [
+        "src/environments/environment"
+      ],
+      "@core/api": [
+        "src/app/core/api"
+      ],
+      "@core/store": [
+        "src/app/core/store"
+      ],
+      "@core/reservations": [
+        "src/app/core/reservations"
+      ],
+      "@ui/layout": [
+        "src/app/ui/layout"
+      ],
+      "@ui/slideshow": [
+        "src/app/ui/slideshow2"
+      ],
+      "local-storage": [
+        "dist/local-storage/local-storage",
+        "dist/local-storage"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
