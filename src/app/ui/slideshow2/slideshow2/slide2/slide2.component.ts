@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core
 import { Slide } from '../models/slide';
 
 @Component({
-  selector: 'app-slide',
+  selector: 'app-slide2',
   template: `
     <div>
       <a [routerLink]="slide.link">
@@ -14,11 +14,12 @@ import { Slide } from '../models/slide';
       </a>
     </div>
   `,
-  styleUrls: ['./slide.component.css'],
+  styleUrls: ['./slide2.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SlideComponent {
+export class Slide2Component {
 
   @Input() slide: Readonly<Slide>;
+
 
 }

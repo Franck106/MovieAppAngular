@@ -5,23 +5,27 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { Slideshow2Module } from '@ui/slideshow';
 
 import { CinemaRoutingModule } from './cinema-routing.module';
 import { MoviesPages } from './pages/movies/movies.pages';
 import { MoviesListComponent } from './components/movies-list/movies-list.component';
 import { MoviesItemComponent } from './components/movies-item/movies-item.component';
 
-
 @NgModule({
-  declarations: [MoviesPages, MoviesListComponent, MoviesItemComponent],
   imports: [
+    CommonModule,
     MatCardModule,
     MatButtonModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
-    CommonModule,
-    CinemaRoutingModule
+    CinemaRoutingModule,
+    Slideshow2Module
   ],
-  exports: [MoviesListComponent, MoviesItemComponent]
+  declarations: [
+    MoviesPages,
+    MoviesListComponent,
+    MoviesItemComponent
+  ]
 })
 export class CinemaModule { }

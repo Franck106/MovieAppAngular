@@ -4,4 +4,5 @@ export interface Slide {
     imgSrc: string;
     imgSrcFull: string;
     imgAlt: string;
-}
+  }
+  
