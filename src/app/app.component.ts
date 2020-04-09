@@ -1,20 +1,24 @@
-import { Component } from '@angular/core';
-import { Network } from '@ngx-pwa/offline';
+import { Component } from "@angular/core";
+import { Network } from "@ngx-pwa/offline";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   template: `
     <div>
+      <app-header
+        [isAuthenticated]="isAuthenticated$ | async"
+        [reservationsCount]="reservationsCount$ | async"
+      ></app-header>
       <main>
-        <h2>app-root works</h2>
         <router-outlet></router-outlet>
       </main>
     </div>
-  `
+  `,
 })
 export class AppComponent {
+  isAuthenticated$: Observable<boolean>;
+  reservationsCount$: Observable<number>;
 
-  title = 'ProjectForTest';
-  
-  constructor( protected network: Network) {}
+  constructor(protected network: Network) {}
 }
