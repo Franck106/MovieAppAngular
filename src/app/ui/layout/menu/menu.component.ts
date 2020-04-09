@@ -15,7 +15,7 @@ import {
       </a>
       <a routeLink="/cinema/theaters" routerLinkActive="nav-active">
         <mat-icon>theaters</mat-icon>
-        <ng-container i18n="@@menuTheaters">Cinemas</ng-container>
+        <ng-container i18n="@@menuTheaters">Cinémas</ng-container>
       </a>
       <a
         *ngIf="isAuthenticated"

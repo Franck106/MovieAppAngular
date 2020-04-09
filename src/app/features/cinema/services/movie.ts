@@ -1,5 +1,7 @@
+import { Schedule } from "./schedule";
+
 export interface Movie {
-    id: number;
+  id: number;
   title: string;
   category: string;
   categoryId: number;
@@ -7,4 +9,6 @@ export interface Movie {
   releasedDate: string;
   imgSrc: string;
   videoSrc: string;
+  schedules?: Schedule[];
+  schedulesGroups?: Schedule[][];
 }
