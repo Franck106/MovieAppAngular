@@ -18,6 +18,8 @@ import { SchedulesComponent } from "./components/schedules/schedules.component";
 import { TheatersListComponent } from "./components/theaters-list/theaters-list.component";
 import { TheatersItemComponent } from "./components/theaters-item/theaters-item.component";
 import { TheatersPage } from "./pages/theaters/theaters.page";
+import { TheaterSchedulesComponent } from "./components/theater-schedules/theater-schedules.component";
+import { TheaterPage } from "./pages/theater/theater.page";
 
 @NgModule({
   imports: [
@@ -40,6 +42,8 @@ import { TheatersPage } from "./pages/theaters/theaters.page";
     TheatersListComponent,
     TheatersItemComponent,
     TheatersPage,
+    TheaterSchedulesComponent,
+    TheaterPage,
   ],
   exports: [
     MovieDetailComponent,
@@ -47,6 +51,7 @@ import { TheatersPage } from "./pages/theaters/theaters.page";
     SchedulesComponent,
     TheatersListComponent,
     TheatersItemComponent,
+    TheaterSchedulesComponent,
   ],
 })
 export class CinemaModule {}

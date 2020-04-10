@@ -6,5 +6,5 @@ export interface Theater {
   address: string;
   logoSrc: string;
   schedules?: Schedule[];
-  schedulesGroup?: Schedule[][];
+  schedulesGroups?: Schedule[][];
 }

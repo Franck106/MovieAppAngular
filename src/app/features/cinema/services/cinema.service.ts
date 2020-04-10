@@ -76,6 +76,20 @@ export class CinemaService {
       );
   }
 
+  getTheater(id: string | number): Observable<Theater> {
+    return this.http
+      .get<APIData<Theater>>(`${environment.apiUrl}/api/cinema/theater/${id}`)
+      .pipe(
+        pluck("data"),
+        map((theater) => ({
+          ...theater,
+          logoSrc: `${environment.apiUrl}${theater.logoSrc}`,
+        })),
+        map(this.groupSchedules("movie")),
+        catchOffline()
+      );
+  }
+
   private groupSchedules(groupBy: "movie"): (theater: Theater) => Theater;
   private groupSchedules(groupBy: "theater"): (movie: Movie) => Movie;
   private groupSchedules<T extends Movie | Theater>(
