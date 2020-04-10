@@ -9,17 +9,17 @@ import {
   selector: "app-menu",
   template: `
     <mat-toolbar color="primary">
-      <a routeLink="/cinema/movies" routerLinkActive="nav-active">
+      <a routerLink="/cinema/movies" routerLinkActive="nav-active">
         <mat-icon>movie</mat-icon>
         <ng-container i18n="@@menuMovies">Films</ng-container>
       </a>
-      <a routeLink="/cinema/theaters" routerLinkActive="nav-active">
+      <a routerLink="/cinema/theaters" routerLinkActive="nav-active">
         <mat-icon>theaters</mat-icon>
         <ng-container i18n="@@menuTheaters">Cinémas</ng-container>
       </a>
       <a
         *ngIf="isAuthenticated"
-        routeLink="/account/profile"
+        routerLink="/account/profile"
         routerLinkActive="nav-active"
       >
         <mat-icon
@@ -33,7 +33,7 @@ import {
       </a>
       <a
         *ngIf="!isAuthenticated"
-        routeLink="/account/login"
+        routerLink="/account/login"
         routerLinkActive="nav-active"
       >
         <mat-icon>account_circle</mat-icon>
