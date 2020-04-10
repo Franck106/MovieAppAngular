@@ -31,6 +31,21 @@ export class CinemaService {
       );
   }
 
+  getTheaters(): Observable<Theater[]> {
+    return this.http
+      .get<APIData<Theater[]>>(`${environment.apiUrl}/api/cinema/theaters`)
+      .pipe(
+        pluck("data"),
+        map((theaters) =>
+          theaters.map((theater) => ({
+            ...theater,
+            logoSrc: `${environment.apiUrl}${theater.logoSrc}`,
+          }))
+        ),
+        catchOffline()
+      );
+  }
+
   getSlides(): Observable<SlideshowSlide[]> {
     return this.http
       .get<APIData<Slide[]>>(`${environment.apiUrl}/api/cinema/slides`)
