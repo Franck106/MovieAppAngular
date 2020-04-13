@@ -13,9 +13,10 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { AccountRoutingModule } from "./account-routing.module";
 import { RegisterPage } from "./pages/register/register.page";
+import { LoginPage } from "./pages/login/login.page";
 
 @NgModule({
-  declarations: [RegisterPage],
+  declarations: [RegisterPage, LoginPage],
   imports: [
     CommonModule,
     MatInputModule,
