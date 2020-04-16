@@ -9,6 +9,8 @@ import {
 } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LayoutModule } from "./ui/layout/layout.module";
+import { AuthInterceptor } from "./core/auth/auth.interceptor";
+import { offlineProviders } from "@ngx-pwa/offline";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,13 @@ import { LayoutModule } from "./ui/layout/layout.module";
     NoopAnimationsModule,
     LayoutModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    offlineProviders({
+      routeOffline: "/oops/offline",
+      routeUnavailable: "oops/unavailable",
+    }),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
