@@ -14,7 +14,7 @@ import { Router } from "@angular/router";
       <ng-content></ng-content>
       <mat-card-actions>
         <a
-          mat-mat-raised-button
+          mat-raised-button
           color="accent"
           *ngFor="let schedule of schedules"
           (click)="book(schedule.id)"
