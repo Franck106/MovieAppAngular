@@ -73,14 +73,14 @@ export class ProfilePage implements OnInit {
               { duration: 2000 }
             );
           }
-          error: () => {
-            this.bookingProgress = false;
-            this.snackBar.open(
-              $localize`:@@bookingError: Echec de la réservation (pas de connexion internet)`,
-              $localize`:@@ok: OK`,
-              { duration: 2000 }
-            );
-          };
+        },
+        error: () => {
+          this.bookingProgress = false;
+          this.snackBar.open(
+            $localize`:@@bookingError:Echec de la réservation (pas de connexion internet)`,
+            $localize`:@@ok:OK`,
+            { duration: 2000 }
+          );
         },
       });
     }
