@@ -12,7 +12,7 @@ import { Reservation } from "@core/reservations";
       <h1 i18n="@@profileTitle">Profil</h1>
       <div *ngIf="reservations$ | async as reservations">
         <p i18n="@@profileReservationNumber">
-          {reservation.length, plural, =0 {Vous n'avew pas de réservation} =1
+          {reservations.length, plural, =0 {Vous n'avez pas de réservation} =1
           {Vous avez une réservation} other {Vous avez
           {{ reservations.length }} réservations}}.
         </p>
@@ -60,7 +60,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit(): void {
     this.reservations$ = this.store.select("reservations");
-    const schedule = this.route.snapshot.queryParams.get("schedule");
+    const schedule = this.route.snapshot.queryParamMap.get("schedule");
     if (schedule) {
       this.bookingProgress = true;
       this.booking.book(schedule).subscribe({
