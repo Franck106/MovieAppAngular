@@ -15,8 +15,8 @@ export class StoreService {
   }
 
   /**
-   * @param
-   * @returns
+   * @param property Name of the property you want to get in the state
+   * @returns An Observable emitting the current value and then emitting each change
    */
   select<T extends keyof State>(property: T): Observable<State[T]> {
     return this.store.pipe(
@@ -29,16 +29,25 @@ export class StoreService {
   }
 
   /**
-   * @param
-   * @returns
+   * Get a property from the state *asynchronously* but *just once*.
+   *
+   * As it's just once, it won't emit again on changes and you don't need to unsubscribe.
+   *
+   * @param property Name of the property you want to get in the state
+   * @returns An Observable emitting the value you asked just once
+   *
+   * Example:
+   * ```typescript
+   * this.store.selectOnce('isAuthenticated').subscribe((isAuthenticated) => {});
+   * ```
    */
   selectOnce<T extends keyof State>(property: T): Observable<State[T]> {
     return this.select(property).pipe(first());
   }
 
   /**
-   * @param
-   * @returns
+   * @param property Name of the property you want to get in the state
+   * @returns The value you asked
    */
   selectSnapshot<T extends keyof State>(property: T): State[T] | undefined {
     return property in this.state
@@ -48,7 +57,7 @@ export class StoreService {
 
   /**
    *
-   * @param partialState
+   * @param partialState Object with the properties you want to update
    */
   dispatch(partialState: Partial<State>): void {
     try {
