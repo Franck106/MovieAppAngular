@@ -42,7 +42,7 @@ import { Slide } from "@ui/slideshow";
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MoviesPages implements OnInit {
+export class MoviesPage implements OnInit {
   constructor(private cinema: CinemaService) {}
 
   movies$: Observable<Movie[]>;

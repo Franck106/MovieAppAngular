@@ -8,7 +8,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { Slideshow2Module } from "@ui/slideshow";
 
 import { CinemaRoutingModule } from "./cinema-routing.module";
-import { MoviesPages } from "./pages/movies/movies.pages";
+import { MoviesPage } from "./pages/movies/movies.page";
 import { MoviesListComponent } from "./components/movies-list/movies-list.component";
 import { MoviesItemComponent } from "./components/movies-item/movies-item.component";
 import { MoviePage } from "./pages/movie/movie.page";
@@ -32,7 +32,7 @@ import { TheaterPage } from "./pages/theater/theater.page";
     Slideshow2Module,
   ],
   declarations: [
-    MoviesPages,
+    MoviesPage,
     MoviesListComponent,
     MoviesItemComponent,
     MoviePage,

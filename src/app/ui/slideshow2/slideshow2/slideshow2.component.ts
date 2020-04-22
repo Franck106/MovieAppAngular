@@ -20,7 +20,7 @@ import { isPlatformBrowser } from "@angular/common";
   template: `
     <div id="slideshow">
       <div
-        id="slide"
+        id="slides"
         (swipe)="onSwipe($event)"
         [style.transform]="transform"
         [style.transitionDuration.ms]="speed"
@@ -41,10 +41,11 @@ import { isPlatformBrowser } from "@angular/common";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Slideshow2Component implements AfterContentInit, OnDestroy {
+  // tslint:disable-next-line: jsdoc-format
   /**Delay between each automatic move */
-  @Input() delay: number;
+  @Input() delay = 5000;
   /**Speed for one move */
-  @Input() speed: 1000;
+  @Input() speed = 1000;
   /**Slides list */
   @ContentChildren(Slide2Component) slides: QueryList<Slide2Component>;
   /**Total of slides */
