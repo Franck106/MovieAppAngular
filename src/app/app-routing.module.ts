@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () =>
       import("./features/account/account.module").then((m) => m.AccountModule),
   },
+  {
+    path: "**",
+    redirectTo: "oops/not-found",
+  },
 ];
 
 @NgModule({
