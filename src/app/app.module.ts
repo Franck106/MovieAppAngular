@@ -4,15 +4,13 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import {
-  NoopAnimationsModule,
-  BrowserAnimationsModule,
-} from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LayoutModule } from "./ui/layout/layout.module";
 import { AuthInterceptor } from "./core/auth/auth.interceptor";
 import { offlineProviders } from "@ngx-pwa/offline";
 import { environment } from "@core/environment";
+import { OopsModule } from "./features/oops/oops.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,8 +20,8 @@ import { environment } from "@core/environment";
     HttpClientModule,
     HammerModule,
     AppRoutingModule,
-    NoopAnimationsModule,
     LayoutModule,
+    OopsModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
       enabled: environment.production,
     }),
