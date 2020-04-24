@@ -14,6 +14,11 @@ const routes: Routes = [
       import("./features/account/account.module").then((m) => m.AccountModule),
   },
   {
+    path: "admin",
+    loadChildren: () =>
+      import("./features/admin/admin.module").then((m) => m.AdminModule),
+  },
+  {
     path: "**",
     redirectTo: "oops/not-found",
   },

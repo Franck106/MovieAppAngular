@@ -11,7 +11,7 @@ import {
     <header id="header">
       <div id="logo">
         <img
-          src="assets/logo.svg"
+          src="assets/bananas.svg.png"
           alt="Cinemapp"
           i18n="@@headerLogoAlt"
           width="60"
@@ -22,6 +22,9 @@ import {
         [isAuthenticated]="isAuthenticated"
         [reservationsCount]="reservationsCount"
       ></app-menu>
+      <div>
+        <a routerLink="/admin">admin</a>
+      </div>
     </header>
   `,
   styleUrls: ["./header.component.css"],
