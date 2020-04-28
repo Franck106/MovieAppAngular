@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "prod": "ng build --prod --localize --output-path ../api/htdocs",
+    "prod": "ng build --prod --base-href /fr/ --localize --output-path ../api/htdocs/fr",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

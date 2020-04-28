@@ -6,9 +6,14 @@ import { AddPage } from "./add/add.page";
 import { DeletePage } from "./delete/delete.page";
 
 const routes: Routes = [
-  { path: "", component: AdminComponent },
-  { path: "add", component: AddPage },
-  { path: "delete", component: DeletePage },
+  {
+    path: "",
+    component: AdminComponent,
+    children: [
+      { path: "add", component: AddPage },
+      { path: "delete", component: DeletePage },
+    ],
+  },
 ];
 
 @NgModule({
