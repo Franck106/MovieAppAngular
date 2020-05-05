@@ -16,9 +16,22 @@ import { RegisterPage } from "./pages/register/register.page";
 import { LoginPage } from "./pages/login/login.page";
 import { ProfilePage } from "./pages/profile/profile.page";
 import { LogoutPage } from "./pages/logout/logout.page";
+import { EmailWithValidationComponent } from "./components/email-with-validation/email-with-validation.component";
+import { CityWithAutocompleteComponent } from "./components/city-with-autocomplete/city-with-autocomplete.component";
+import { ErrorsComponent } from "./components/errors/errors.component";
+import { PasswordWithConfirmationComponent } from "./components/password-with-confirmation/password-with-confirmation.component";
 
 @NgModule({
-  declarations: [RegisterPage, LoginPage, ProfilePage, LogoutPage],
+  declarations: [
+    RegisterPage,
+    LoginPage,
+    ProfilePage,
+    LogoutPage,
+    EmailWithValidationComponent,
+    CityWithAutocompleteComponent,
+    ErrorsComponent,
+    PasswordWithConfirmationComponent,
+  ],
   imports: [
     CommonModule,
     MatInputModule,
