@@ -1,55 +1,26 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component } from "@angular/core";
 import { AccountService } from "../../services/account.service";
-import { AutocompleteService } from "../../services/autocomplete.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { FormControl } from "@angular/forms";
-import { Subscription, Observable, of } from "rxjs";
-import { filter, debounceTime, switchMap, catchError } from "rxjs/operators";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   template: `
     <mat-card>
-      <form method="post" (ngSubmit)="register()" #registerForm="ngForm">
+      <form method="post" (ngSubmit)="register()" [formGroup]="form">
         <h1 i18n="@@registerTitle">Inscription</h1>
         <p i18n="@@registerWarning">
           Attention, il s'agit d'une application de test. Email et mot de passe
           seront visibles en clair par n'importe qui.
         </p>
-        <ul *ngIf="errors.length">
-          <li *ngFor="let error of errors">{{ error }}</li>
-        </ul>
-        <mat-form-field>
-          <input
-            type="email"
-            [(ngModel)]="form.email"
-            #emailControl="ngModel"
-            name="email"
-            matInput
-            required
-            autocomplete="email"
-            placeholder="Adresse couriel"
-            i18n-placeholder="@@registerEmail"
-          />
-          <p *ngIf="emailControl.invalid && emailControl.touched">
-            Le couriel est obligatoire
-          </p>
-        </mat-form-field>
-        <mat-form-field>
-          <input
-            type="password"
-            [(ngModel)]="form.password"
-            name="password"
-            matInput
-            required
-            placeholder="Mot de passe"
-            i18n-placeholder="@@registerPassword"
-          />
-          <mat-error></mat-error>
-        </mat-form-field>
+        <app-email-with-validation [form]="form"></app-email-with-validation>
+        <app-password-with-confirmation
+          [form]="form"
+        ></app-password-with-confirmation>
+        <app-errors [errors]="errors"></app-errors>
         <div>
-          <p i18n="@@registerCard">J'ai une carte</p>
-          <mat-radio-group>
+          <p i18n="@@registerCard">J'ai une carte :</p>
+          <mat-radio-group name="card">
             <mat-radio-button value="" checked i18n="@@registerCardNo"
               >Non</mat-radio-button
             >
@@ -60,7 +31,7 @@ import { filter, debounceTime, switchMap, catchError } from "rxjs/operators";
         <mat-form-field>
           <mat-select
             name="category"
-            placeholder="Genre de films préférés"
+            placeholder="Genre de film préféré"
             i18n-placeholder="@@registerGenre"
           >
             <mat-option value="" i18n="@@registerGenreNone"
@@ -72,11 +43,11 @@ import { filter, debounceTime, switchMap, catchError } from "rxjs/operators";
             <mat-option value="comedy" i18n="@@registerGenreComedy"
               >Comédie</mat-option
             >
-            <mat-option value="horror" i18n="@@registerGenreHorror"
-              >Horreur</mat-option
-            >
             <mat-option value="drama" i18n="@@registerGenreDrama"
               >Drame</mat-option
+            >
+            <mat-option value="horror" i18n="@@registerGenreHorror"
+              >Horreur</mat-option
             >
           </mat-select>
         </mat-form-field>
@@ -85,37 +56,19 @@ import { filter, debounceTime, switchMap, catchError } from "rxjs/operators";
             name="profile"
             matInput
             cdkTextareaAutosize
-            placeholder="Apropos de vous"
+            placeholder="A propos de vous"
             i18n-placeholder="@@registerAboutYou"
           ></textarea>
         </mat-form-field>
-        <mat-form-field>
-          <input
-            type="text"
-            name="city"
-            [formControl]="cityControl"
-            [matAutocomplete]="cityAuto"
-            matInput
-            placeholder="Votre ville"
-            i18n-placeholder="@@registerCity"
-          />
-        </mat-form-field>
-        <mat-autocomplete #cityAuto>
-          <mat-option
-            *ngFor="let suggestion of citySuggestions"
-            [value]="suggestion"
-            >{{ suggestion }}</mat-option
-          >
-        </mat-autocomplete>
+        <app-city-with-autocomplete [form]="form"></app-city-with-autocomplete>
         <div>
-          <mat-checkbox name="condition" required>
+          <mat-checkbox name="conditions" required>
             <ng-container i18n="@@registerConditions"
               >J'accepte les conditions d'utilisation</ng-container
-            >
+            >. *
           </mat-checkbox>
         </div>
         <button
-          [disabled]="registerForm.invalid"
           type="submit"
           mat-raised-button
           color="accent"
@@ -125,7 +78,7 @@ import { filter, debounceTime, switchMap, catchError } from "rxjs/operators";
         </button>
         <p class="center">
           <a routerLink="../login" i18n="registerExistingAccount"
-            >Déjà inscrit/e? Authetifiez-vous.</a
+            >Déjà inscrit/e? Authentifiez-vous.</a
           >
         </p>
       </form>
@@ -133,48 +86,28 @@ import { filter, debounceTime, switchMap, catchError } from "rxjs/operators";
   `,
   styleUrls: ["./register.page.css"],
 })
-export class RegisterPage implements OnInit, OnDestroy {
-  form = {
-    email: "",
-    password: "",
-  };
-  cityControl = new FormControl("");
+export class RegisterPage {
+  form = new FormGroup({
+    email: new FormControl("", Validators.required),
+    password: new FormGroup({
+      password1: new FormControl("", Validators.required),
+      password2: new FormControl(""),
+    }),
+  });
   errors: string[] = [];
-  citySuggestions: string[] = [];
-  citySubscription: Subscription;
 
   constructor(
     private account: AccountService,
-    private autocomplete: AutocompleteService,
     private router: Router,
     private route: ActivatedRoute,
     private snackbar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-    this.citySubscription = (this.cityControl.valueChanges as Observable<
-      string
-    >)
-      .pipe(
-        filter((value) => value.length > 2),
-        debounceTime(500),
-        switchMap((value) => this.autocomplete.getCitySuggestions(value)),
-        catchError(() => of([]))
-      )
-      .subscribe((res) => {
-        this.citySuggestions = res;
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.citySubscription.unsubscribe();
-  }
-
   register(): void {
     const loading = this.snackbar.open(
       $localize`:@@registerInProgress: Inscription en cours...`
     );
-    this.account.register(this.form).subscribe({
+    this.account.register(this.form.value).subscribe({
       next: ({ error }) => {
         loading.dismiss();
         if (!error) {
