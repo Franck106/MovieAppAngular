@@ -3,14 +3,18 @@ import { TestBed } from "@angular/core/testing";
 import { LocalStorageService } from "./local-storage.service";
 
 describe("LocalStorageService", () => {
-  let service: LocalStorageService;
+  let localStorageService: LocalStorageService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(LocalStorageService);
+    localStorage.clear();
+    localStorageService = new LocalStorageService();
   });
 
-  it("should be created", () => {
-    expect(service).toBeTruthy();
+  it("should serialize", () => {
+    const index = "test";
+    const value = { hello: "world" };
+    localStorageService.setItem(index, value);
+    const result = localStorageService.getItem(index);
+    expect(result).toEqual(value);
   });
 });
